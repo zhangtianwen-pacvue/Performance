@@ -20,7 +20,6 @@ export default function usePerformance() {
     if (!ele) {
       throw new Error('Missing Required Element')
     }
-    excutor = next
     start = performance.now()
     const eleObserver = new MutationObserver((list) => {
       mutationTiming = {
@@ -28,6 +27,10 @@ export default function usePerformance() {
       }
     })
     eleObserver.observe(ele, { subtree: true, childList: true })
+    excutor = function(data) {
+      eleObserver.disconnect()
+      next(data)
+    }
     submit(duration)
   }
   const observeNavigation = function() {
