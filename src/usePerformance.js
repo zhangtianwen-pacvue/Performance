@@ -5,8 +5,8 @@ export default function usePerformance() {
   let excutor = null
   let timer = null
   let called = false
+  let start = 0
   const defaultExcutor = (data) => { console.log(data) }
-  const start = performance.now()
   const submit = function(duration) {
     timer = setTimeout(() => {
       called = true
@@ -21,6 +21,7 @@ export default function usePerformance() {
       throw new Error('Missing Required Element')
     }
     excutor = next
+    start = performance.now()
     const eleObserver = new MutationObserver((list) => {
       mutationTiming = {
         time: performance.now() - start
