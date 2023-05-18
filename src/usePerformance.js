@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted } from 'vue'
 export default function usePerformance() {
   let navigationTiming = null
-  let mutationTiming = null
+  let mutationTiming = { time: 0 }
   let excutor = null
   let timer = null
   let called = false
